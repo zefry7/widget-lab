@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import store from './app/store/store';
+import store from './store/store';
 import WeatherApp from './apps/WeatherApp/WeatherApp';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';

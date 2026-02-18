@@ -2,17 +2,22 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { DAYS_OF_WEEK } from './shared/constant';
-import ClearDaySvg from './components/icons/ClearDaySvg';
-import CloudySvg from './components/icons/CloudySvg';
-import { LIST_ICONS_WEATHER } from './components/icons/helpers/constants';
+import ClearDaySvg from '../../assets/icons/ClearDaySvg';
+import CloudySvg from '../../assets/icons/CloudySvg';
+import { LIST_ICONS_WEATHER } from '../../assets/icons/helpers/constants';
+import HourlyList from './components/HourlyList/HourlyList';
+import Hint from '../../components/Hint/Hint';
+import Loader from '../../components/Loader/Loader';
+import Settings from '../../assets/icons/Settings';
 
 const WeatherApp = () => {
+  const [openSettings, setOpenSettings] = useState(false);
   const [dataWeather, setDataWeather] = useState(null);
 
   useEffect(() => {
     const fetchFn = async () => {
       const response = await fetch(
-        '/nominatim/search?q=Moscow&format=json&limit=1'
+        '/nominatim/search?q=Санкт-Петербург&format=json&limit=1'
       );
       const dataFetch = await response.json();
 
@@ -44,63 +49,53 @@ const WeatherApp = () => {
     console.log(dataWeather);
   }, [dataWeather]);
 
-  if (!dataWeather) {
-    return 'loading';
-  }
-
   return (
     <div className={styles.wrapper}>
-      <div className={styles.header}>
-        <div className={styles.header_left}>
-          <h3 className={styles.header_city}>{dataWeather.city}</h3>
-          <span className={styles.header_date}>
-            {DAYS_OF_WEEK[dataWeather.date.day_code]},{' '}
-            {dataWeather.date.day_and_month}
-          </span>
-        </div>
-        <button className={styles.header_setting}>Н</button>
-      </div>
-      {/* <div className={styles.divider} /> */}
-      <div
-        style={{
-          padding: '10px 0',
-          display: 'flex',
-          justifyContent: 'space-around',
-        }}
-      >
-        <span className={styles.temperature}>
-          {dataWeather.days[0].temperature}°
-        </span>
-        <CloudySvg scale={4} />
-      </div>
-      {/* <div className={styles.divider} /> */}
-      <div
-        style={{
-          display: 'flex',
-          gap: '8px',
-          overflow: 'auto',
-          margin: '0 -16px',
-          padding: '0 16px',
-        }}
-      >
-        {dataWeather.days.map((v, i) => {
-          const Icons =
-            v.weathercode == 3
-              ? LIST_ICONS_WEATHER[v.weathercode]
-              : LIST_ICONS_WEATHER[0];
-
-          return (
-            <div
-              className={`${styles.item} ${i == 0 ? styles.item_active : ''}`}
-              key={v.date}
-            >
-              <p className={styles.item_date}>{v.date}</p>
-              <Icons scale={1.2} />
-              <span className={styles.item_t}>{v.temperature}°</span>
+      {!dataWeather ? (
+        <Loader />
+      ) : (
+        <>
+          {' '}
+          <div className={styles.header}>
+            <div className={styles.header_left}>
+              <h3 className={styles.header_city}>{dataWeather.city}</h3>
+              <span className={styles.header_date}>
+                {DAYS_OF_WEEK[dataWeather.date.day_code]},{' '}
+                {dataWeather.date.day_and_month}
+              </span>
             </div>
-          );
-        })}
-      </div>
+            <Hint
+              anchorItem={
+                <Settings
+                  onClick={() => setOpenSettings((v) => !v)}
+                  className={styles.header_setting}
+                />
+              }
+              open={openSettings}
+              content={
+                <div>
+                  <p>Город:</p>
+                  <p>Вариант:</p>
+                  <p>Тема:</p>
+                </div>
+              }
+            />
+          </div>
+          <div
+            style={{
+              padding: '16px 0',
+              display: 'flex',
+              justifyContent: 'space-around',
+            }}
+          >
+            <span className={styles.temperature}>
+              {dataWeather.days[0].temperature}°
+            </span>
+            <CloudySvg scale={3} />
+          </div>
+          <HourlyList dataWeather={dataWeather} />
+        </>
+      )}
     </div>
   );
 };

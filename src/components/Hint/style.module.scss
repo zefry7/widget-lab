@@ -1,0 +1,16 @@
+.wrapper {
+  position: relative;
+  width: max-content;
+}
+
+.hint {
+  position: absolute;
+  left: calc(100% + 16px);
+  padding: 16px;
+  top: 0;
+  height: 200px;
+  width: 200px;
+  border-radius: 16px;
+  background-color: var(--color-light-steel-0);
+  border: 3px solid var(--color-light-steel-3);
+}
