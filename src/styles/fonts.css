@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../../public/fonts/NotoSans-Bold.eot');
+  src:
+    url('../../public/fonts/NotoSans-Bold.eot') format('embedded-opentype'),
+    url('../../public/fonts/NotoSans-Bold.woff2') format('woff2'),
+    url('../../public/fonts/NotoSans-Bold.woff') format('woff'),
+    url('../../public/fonts/NotoSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../../public/fonts/NotoSans-Light.eot');
+  src:
+    url('../../public/fonts/NotoSans-Light.eot') format('embedded-opentype'),
+    url('../../public/fonts/NotoSans-Light.woff2') format('woff2'),
+    url('../../public/fonts/NotoSans-Light.woff') format('woff'),
+    url('../../public/fonts/NotoSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../../public/fonts/NotoSans-Medium.eot');
+  src:
+    url('../../public/fonts/NotoSans-Medium.eot') format('embedded-opentype'),
+    url('../../public/fonts/NotoSans-Medium.woff2') format('woff2'),
+    url('../../public/fonts/NotoSans-Medium.woff') format('woff'),
+    url('../../public/fonts/NotoSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../../public/fonts/NotoSans-Regular.eot');
+  src:
+    url('../../public/fonts/NotoSans-Regular.eot') format('embedded-opentype'),
+    url('../../public/fonts/NotoSans-Regular.woff2') format('woff2'),
+    url('../../public/fonts/NotoSans-Regular.woff') format('woff'),
+    url('../../public/fonts/NotoSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../../public/fonts/NotoSans-SemiBold.eot');
+  src:
+    url('../../public/fonts/NotoSans-SemiBold.eot') format('embedded-opentype'),
+    url('../../public/fonts/NotoSans-SemiBold.woff2') format('woff2'),
+    url('../../public/fonts/NotoSans-SemiBold.woff') format('woff'),
+    url('../../public/fonts/NotoSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

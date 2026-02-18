@@ -2,6 +2,9 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { DAYS_OF_WEEK } from './shared/constant';
+import ClearDaySvg from './components/icons/ClearDaySvg';
+import CloudySvg from './components/icons/CloudySvg';
+import { LIST_ICONS_WEATHER } from './components/icons/helpers/constants';
 
 const WeatherApp = () => {
   const [dataWeather, setDataWeather] = useState(null);
@@ -21,7 +24,7 @@ const WeatherApp = () => {
       const days = dataFetch2.hourly.time.map((v, i) => ({
         date: dayjs(v).format('HH:mm'),
         weathercode: dataFetch2.hourly.weathercode[i],
-        temperature: dataFetch2.hourly.temperature_2m[i],
+        temperature: Math.round(dataFetch2.hourly.temperature_2m[i]),
       }));
 
       setDataWeather({
@@ -57,23 +60,46 @@ const WeatherApp = () => {
         </div>
         <button className={styles.header_setting}>Н</button>
       </div>
-      <div>
+      {/* <div className={styles.divider} /> */}
+      <div
+        style={{
+          padding: '10px 0',
+          display: 'flex',
+          justifyContent: 'space-around',
+        }}
+      >
         <span className={styles.temperature}>
           {dataWeather.days[0].temperature}°
         </span>
+        <CloudySvg scale={4} />
       </div>
-      <div className={styles.divider} />
-      <div style={{ display: 'flex', gap: '8px', overflow: 'scroll' }}>
-        {dataWeather.days.map((v, i) => (
-          <div
-            className={`${styles.item} ${i == 0 ? styles.item_active : ''}`}
-            key={v.date}
-          >
-            <p className={styles.item_date}>{v.date}</p>
-            <span>{v.weathercode}</span>
-            <span className={styles.item_t}>{v.temperature}°</span>
-          </div>
-        ))}
+      {/* <div className={styles.divider} /> */}
+      <div
+        style={{
+          display: 'flex',
+          gap: '8px',
+          overflow: 'auto',
+          margin: '0 -16px',
+          padding: '0 16px',
+        }}
+      >
+        {dataWeather.days.map((v, i) => {
+          const Icons =
+            v.weathercode == 3
+              ? LIST_ICONS_WEATHER[v.weathercode]
+              : LIST_ICONS_WEATHER[0];
+
+          return (
+            <div
+              className={`${styles.item} ${i == 0 ? styles.item_active : ''}`}
+              key={v.date}
+            >
+              <p className={styles.item_date}>{v.date}</p>
+              <Icons scale={1.2} />
+              <span className={styles.item_t}>{v.temperature}°</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
