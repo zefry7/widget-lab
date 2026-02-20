@@ -14,9 +14,6 @@ const HourlyList = ({ dataWeather }) => {
       isDown = true;
       startX = e.pageX;
       scrollLeft = ref.current.scrollLeft;
-      console.log(e);
-
-      console.log(e.pageX, ref.current.offsetLeft, ref.current.scrollLeft);
     };
     const handleMouseUp = () => {
       isDown = false;
@@ -36,21 +33,24 @@ const HourlyList = ({ dataWeather }) => {
       ref.current.addEventListener('mouseleave', handleMouseUp);
       ref.current.addEventListener('mousemove', handleMouseMove);
     }
+
+    return () => {
+      if (ref.current) {
+        ref.current.removeAttribute('mousedown');
+        ref.current.removeAttribute('mouseup');
+        ref.current.removeAttribute('mouseleave');
+        ref.current.removeAttribute('mousemove');
+      }
+    };
   }, []);
 
   return (
     <div ref={ref} className={styles.wrapper}>
       {dataWeather.days.map((v, i) => {
-        const Icons =
-          v.weathercode == 3
-            ? LIST_ICONS_WEATHER[v.weathercode]
-            : LIST_ICONS_WEATHER[0];
+        const Icons = v.weathercode == 3 ? LIST_ICONS_WEATHER[v.weathercode] : LIST_ICONS_WEATHER[0];
 
         return (
-          <div
-            className={`${styles.item} ${i == 0 ? styles.item_active : ''}`}
-            key={v.date}
-          >
+          <div className={`${styles.item} ${i == 0 ? styles.item_active : ''}`} key={v.date}>
             <p className={styles.item_date}>{v.date}</p>
             <Icons />
             <span className={styles.item_t}>{v.temperature}°</span>

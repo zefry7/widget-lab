@@ -2,17 +2,30 @@
 @import './fonts.css';
 
 :root {
-  --color-light-steel-0: #f8f9fa;
-  --color-light-steel-1: #e9ecef;
-  --color-light-steel-2: #dee2e6;
-  --color-light-steel-3: #ced4da;
-  --color-light-steel-4: #adb5bd;
-  --color-light-steel-5: #6c757d;
-  --color-light-steel-6: #495057;
-  --color-light-steel-7: #343a40;
-  --color-light-steel-8: #212529;
-  --color-light-blue: #40aae8;
+  --color-steel-0: #f8f9fa;
+  --color-steel-1: #e9ecef;
+  --color-steel-2: #dee2e6;
+  --color-steel-3: #ced4da;
+  --color-steel-4: #adb5bd;
+  --color-steel-5: #6c757d;
+  --color-steel-6: #495057;
+  --color-steel-7: #343a40;
+  --color-steel-8: #212529;
+  --color-blue: #57a0ee;
   --color-dark-blue: #438eba;
+  --text-white: #f8f9fa;
+}
+
+.dark-component {
+  --color-steel-0: #212529;
+  --color-steel-1: #343a40;
+  --color-steel-2: #495057;
+  --color-steel-3: #6c757d;
+  --color-steel-4: #adb5bd;
+  --color-steel-5: #ced4da;
+  --color-steel-6: #dee2e6;
+  --color-steel-7: #e9ecef;
+  --color-steel-8: #f8f9fa;
 }
 
 * {

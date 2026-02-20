@@ -13,18 +13,18 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--color-light-steel-1);
+    background: var(--color-steel-1);
     border-radius: 16px;
     margin: 0 16px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--color-light-steel-3);
+    background: var(--color-steel-3);
     border-radius: 16px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: var(--color-light-steel-4);
+    background: var(--color-steel-4);
   }
 }
 
@@ -35,26 +35,26 @@
   gap: 4px;
   padding: 12px 8px;
   border-radius: 56px;
-  background-color: var(--color-light-steel-1);
+  background-color: var(--color-steel-1);
   margin-bottom: 8px;
 
   &_active {
-    background-color: var(--color-light-blue);
+    background-color: var(--color-blue);
 
     & > p,
     & > *:last-child {
-      color: var(--color-light-steel-1);
+      color: var(--text-white);
     }
   }
 
   &_date {
-    color: var(--color-light-steel-4);
+    color: var(--color-steel-4);
     font-weight: 500;
     font-size: 12px;
   }
 
   &_t {
-    color: var(--color-light-steel-8);
+    color: var(--color-steel-8);
     font-weight: 700;
     font-size: 14px;
   }

@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  color: var(--color-steel-7);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 2px solid var(--color-steel-4);
+  background-color: var(--color-steel-1);
+  border-radius: 8px;
+  cursor: pointer;
+
+  &_text {
+    font-size: 14px;
+    color: var(--color-steel-8);
+  }
+}
+
+.list {
+  position: absolute;
+  top: calc(100% + 2px);
+  width: 100%;
+  border: 2px solid var(--color-steel-4);
+  background-color: var(--color-steel-1);
+  border-radius: 8px;
+  overflow: hidden;
+
+  &_content {
+    height: 25vh;
+    overflow: auto;
+  }
+
+  &_item {
+    padding: 8px;
+    font-size: 14px;
+    color: var(--color-steel-8);
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--color-steel-0);
+    }
+  }
+}

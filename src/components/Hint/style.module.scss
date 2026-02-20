@@ -5,12 +5,28 @@
 
 .hint {
   position: absolute;
-  left: calc(100% + 16px);
+  left: calc(100% + 12px);
   padding: 16px;
-  top: 0;
+  top: -10px;
+  z-index: 10;
   height: 200px;
   width: 200px;
   border-radius: 16px;
-  background-color: var(--color-light-steel-0);
-  border: 3px solid var(--color-light-steel-3);
+  background-color: var(--color-steel-0);
+  border: 3px solid var(--color-steel-3);
+
+  &::before {
+    content: '';
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    top: 15px;
+    left: -10px;
+    border-top: 3px solid var(--color-steel-3);
+    border-left: 3px solid var(--color-steel-3);
+    background-color: var(--color-steel-0);
+    background-clip: padding-box;
+    transform: rotateZ(-45deg);
+  }
 }

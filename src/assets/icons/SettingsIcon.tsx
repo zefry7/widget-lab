@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Settings = ({ className, onClick }) => {
+const SettingsIcon = ({ className, onClick }) => {
   return (
     <svg
       fill="#000000"
@@ -20,4 +20,4 @@ const Settings = ({ className, onClick }) => {
   );
 };
 
-export default Settings;
+export default SettingsIcon;
