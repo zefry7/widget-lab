@@ -30,4 +30,23 @@
 
 * {
   font-family: 'Noto Sans';
+
+  &::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-steel-1);
+    border-radius: 16px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-steel-3);
+    border-radius: 16px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-steel-4);
+  }
 }

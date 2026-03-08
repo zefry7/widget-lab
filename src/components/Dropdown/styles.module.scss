@@ -27,6 +27,7 @@
 
 .list {
   position: absolute;
+  z-index: 1;
   top: calc(100% + 2px);
   width: 100%;
   border: 2px solid var(--color-steel-4);
@@ -35,7 +36,7 @@
   overflow: hidden;
 
   &_content {
-    height: 25vh;
+    max-height: 25vh;
     overflow: auto;
   }
 

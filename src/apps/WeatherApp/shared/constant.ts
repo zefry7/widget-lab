@@ -26,3 +26,10 @@ export const CITIES = [
   'Волгоград',
   'Ярославль',
 ];
+
+export const WEATHER_VERSION_NAMES = ['Погода на день', 'Погода на неделю'];
+
+export enum WEATHER_VERSIONS {
+  WeatherV1 = 'Погода на день',
+  WeatherV2 = 'Погода на неделю',
+}

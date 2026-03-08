@@ -1,52 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './styles.module.scss';
 import { LIST_ICONS_WEATHER } from '../../../../assets/icons/helpers/constants';
+import useScroll from '../../hooks/useScroll';
 
 const HourlyList = ({ dataWeather }) => {
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let isDown = false;
-    let scrollLeft = 0;
-    let startX = 0;
-
-    const handleMouseDown = (e) => {
-      isDown = true;
-      startX = e.pageX;
-      scrollLeft = ref.current.scrollLeft;
-    };
-    const handleMouseUp = () => {
-      isDown = false;
-    };
-    const handleMouseMove = (e) => {
-      e.preventDefault();
-      if (isDown) {
-        const x = e.pageX;
-        const walk = (x - startX) * 2;
-        ref.current.scrollLeft = scrollLeft - walk;
-      }
-    };
-
-    if (ref.current) {
-      ref.current.addEventListener('mousedown', handleMouseDown);
-      ref.current.addEventListener('mouseup', handleMouseUp);
-      ref.current.addEventListener('mouseleave', handleMouseUp);
-      ref.current.addEventListener('mousemove', handleMouseMove);
-    }
-
-    return () => {
-      if (ref.current) {
-        ref.current.removeAttribute('mousedown');
-        ref.current.removeAttribute('mouseup');
-        ref.current.removeAttribute('mouseleave');
-        ref.current.removeAttribute('mousemove');
-      }
-    };
-  }, []);
+  useScroll(ref);
 
   return (
     <div ref={ref} className={styles.wrapper}>
-      {dataWeather.days.map((v, i) => {
+      {dataWeather.hours.map((v, i) => {
         const Icons = v.weathercode == 3 ? LIST_ICONS_WEATHER[v.weathercode] : LIST_ICONS_WEATHER[0];
 
         return (
