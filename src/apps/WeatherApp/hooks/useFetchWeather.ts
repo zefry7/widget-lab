@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { CITIES, WEATHER_VERSIONS } from '../shared/constant';
 import dayjs from 'dayjs';
+import { useAppSelector } from '../../../store/store';
+import { selectVersion } from '../../../store/slices/weather.slice';
 
 const createQueryParamsWithWeather = (version) => {
   switch (version) {
@@ -29,7 +31,8 @@ const formatData = (version, data) => {
   }
 };
 
-const useFetchWeather = (version) => {
+const useFetchWeather = () => {
+  const version = useAppSelector(selectVersion);
   const [selectedCity, setSelectedCity] = useState(CITIES[0]);
   const [dataWeather, setDataWeather] = useState(null);
   const [isLoading, setLoading] = useState(false);

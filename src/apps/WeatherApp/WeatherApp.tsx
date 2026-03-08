@@ -13,49 +13,55 @@ import Settings from './components/Settings/Settings';
 import useFetchWeather from './hooks/useFetchWeather';
 import WeatherContentV1 from './v1/WeatherContentV1';
 import WeatherContentV2 from './v2/WeatherContentV2';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { selectVersion, setVersion } from '../../store/slices/weather.slice';
+import HeaderV1 from './v1/components/HeaderV1';
+import HeaderV2 from './v2/components/HeaderV2';
+
+const CONFIGURATE_WEATHER_APP = {
+  [WEATHER_VERSIONS.WeatherV1]: {
+    content: WeatherContentV1,
+    header: HeaderV1,
+    maxWidth: '300px',
+  },
+  [WEATHER_VERSIONS.WeatherV2]: {
+    content: WeatherContentV2,
+    header: HeaderV2,
+    maxWidth: '600px',
+  },
+};
 
 const WeatherApp = () => {
-  const [version, setVersion] = useState(WEATHER_VERSIONS.WeatherV2);
+  const dispatch = useAppDispatch();
+  const version = useAppSelector(selectVersion);
+
   const [openSettings, setOpenSettings] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const { dataWeather, handleSelectedCity, isLoading, city } = useFetchWeather(version);
+  const { dataWeather, handleSelectedCity, isLoading, city } = useFetchWeather();
 
   const handleChangeTheme = useCallback(() => {
     setIsDarkTheme((v) => !v);
   }, []);
 
   const hadleSelectedVersion = useCallback((name: WEATHER_VERSIONS) => {
-    setVersion(name);
+    dispatch(setVersion(name));
   }, []);
+
+  const Header = CONFIGURATE_WEATHER_APP[version].header;
+  const Content = CONFIGURATE_WEATHER_APP[version].content;
 
   return (
     <div
-      style={{ maxWidth: version === WEATHER_VERSIONS.WeatherV1 ? '300px' : '600px' }}
+      style={{ maxWidth: CONFIGURATE_WEATHER_APP[version].maxWidth }}
       className={`${styles.wrapper} ${isDarkTheme ? 'dark-component' : ''}`}
     >
       <div className={styles.header}>
-        {version === WEATHER_VERSIONS.WeatherV1 ? (
-          <div className={styles.header_left}>
-            <h3 className={styles.header_city}>{city}</h3>
-            <span className={styles.header_date}>
-              {DAYS_OF_WEEK[dayjs().day()]}, {dayjs().format('DD MMMM')}
-            </span>
-          </div>
-        ) : (
-          <div className={styles.header_left}>
-            <h3 className={styles.header_city}>{city}</h3>
-            <span className={styles.header_date}>
-              {dayjs(dataWeather?.days?.[0]?.date).format('DD MMMM')} -{' '}
-              {dayjs(dataWeather?.days?.[6]?.date).format('DD MMMM')}
-            </span>
-          </div>
-        )}
-
+        <Header city={city} dataWeather={dataWeather} />
         <Hint
+          open={openSettings}
           anchorItem={
             <SettingsIcon onClick={() => setOpenSettings((v) => !v)} className={styles.header_setting} />
           }
-          open={openSettings}
           content={
             <Settings
               handleSelectedCity={handleSelectedCity}
@@ -65,12 +71,7 @@ const WeatherApp = () => {
           }
         />
       </div>
-      {version === WEATHER_VERSIONS.WeatherV1 && (
-        <WeatherContentV1 dataWeather={dataWeather} isLoading={isLoading} />
-      )}
-      {version === WEATHER_VERSIONS.WeatherV2 && (
-        <WeatherContentV2 dataWeather={dataWeather} isLoading={isLoading} />
-      )}
+      <Content dataWeather={dataWeather} isLoading={isLoading} />
     </div>
   );
 };
